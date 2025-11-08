@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap');
 /* =============================================
             Website Resets
 ================================================ */
@@ -25,7 +25,76 @@
 	outline: none;
 }
 
-/*=============================================
-            html, body, and utility
-================================================*/
+
+/*===============================================================
+            html, body, and utility classes
+==================================================================*/
+
+
+
+
+.utils-container-fluid {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+.utils-container {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+@media (min-width: 576px) {
+	.utils-container {
+		max-width: 544px;
+	}
+}
+
+@media (min-width: 768px) {
+	.utils-container {
+		max-width: 720px;
+	}
+}
+
+@media (min-width: 992px) {
+	.utils-container {
+		max-width: 960px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.utils-container {
+		max-width: 1144px;
+	}
+}
+
+.utils-center-text {
+	text-align: center;
+}
+
+.utils-center-horizontally {
+	margin: auto;
+	width: 100%;
+
+}
+
+.utils-center-vertically {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+
+}
+
+.utils-center-horizontally-vertically {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+
+}
 

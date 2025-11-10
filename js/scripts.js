@@ -2,6 +2,7 @@
 $(window).on('load', function () {
 	// makes sure that whole site is loaded
 	console.log('and the Window has loaded,');
+   
 	$('.effect-07').val('');
 
 	$('.effect-07').focusout(function () {

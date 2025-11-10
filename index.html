@@ -21,22 +21,33 @@
 				<fieldset>
 					<legend>Choose Your Unit Of Measurement</legend>
 					<p class="utils-add-cursor">
-						<label class="utils-add-cursor" for="imperial">
-							<input class="utils-add-cursor" type="radio" id="imperial" name="measurement" value="Inches and Pounds" />Inches and Pounds
-						</label>
+						<input class="utils-add-cursor" type="radio" id="imperial" name="measurement"
+							value="Inches and Pounds" />
+						<label class="utils-add-cursor label-radio" for="imperial">Inches and Pounds</label>
 					</p>
-			
+
 					<p class="utils-add-cursor">
-						<label class="utils-add-cursor" for="metric">
-							<input class="utils-add-cursor"  type="radio" id="metric" name="measurement" value="Centimeters and Kilograms" />Centimeters and Kilograms
-						</label>
+						<input class="utils-add-cursor" type="radio" id="metric" name="measurement"
+							value="Centimeters and Kilograms" />
+						<label class="utils-add-cursor label-radio" for="metric">Centimeters and Kilograms</label>
 					</p>
 				</fieldset>
+
+				<div class="col-3 input-effect">
+					<input type="number" id="height" name="height" class="effect-07" placeholder="" />
+					<label for="height">Height</label>
+					<span class="focus-background"></span>
+				</div>
+				<div class="col-3 input-effect">
+					<input type="text" id="weight" name="weight" class="effect-07" placeholder="" />
+					<label for="weight">Weight</label>
+					<span class="focus-background"></span>
+				</div>
 			</form>
 
 
 		</main>
-	
+
 
 		<!-- javascript -->
 		<script src="./js/jquery-3.7.1.min.js"></script>

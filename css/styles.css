@@ -111,6 +111,18 @@
 	--color-semantic-extreme-obese-200: hsl(0, 96%, 43%);
 	--color-semantic-extreme-obese-100: hsl(0, 96%, 48%);
 
+
+
+	/**************** letter spacing ****************/
+		--ls-letter-spacing-100: 1px;
+		--ls-letter-spacing-200: 2px;
+		--ls-letter-spacing-300: 3px;
+		--ls-letter-spacing-400: 5px;
+		--ls-letter-spacing-500: -1px;
+		--ls-letter-spacing-600: -2px;
+		--ls-letter-spacing-700: -3px;
+		--ls-letter-spacing-800: -5px;
+
 }
 html {
 	font-size: 100%;
@@ -129,6 +141,7 @@ body {
 	font-optical-sizing: auto;
 	font-weight: 400;
 	font-style: normal;
+	overflow-x: hidden;
 	background-color: var(--color-neutral-000);
 }
 /*===============================================================
@@ -198,7 +211,7 @@ a:hover {
 	opacity: 1;
 }
 
-fieldset {
+fieldset, .col-3 {
 	width: 150%;
 }
 
@@ -385,7 +398,7 @@ p > label {
  	border-radius: 10px;
  	/* remove the default square selection border when you toggle the radio button */
  	outline: none;
- 	border: 2px solid gray;
+ 	border: 2px solid var(--color-neutral-500);
  	/* Adjusts the position of the radio buttons on the text baseline */
  	vertical-align: -11px;
  }
@@ -400,7 +413,7 @@ selected/checked. */
  	width: 10px;
  	height: 10px;
  	border-radius: 10px;
- 	background-color: #414141;
+ 	background-color: var(--color-neutral-800);
  	font-size: 1em;
  	/* set the original position of red dot */
  	transform: translate(-30px, 0px) scale(0);
@@ -414,4 +427,73 @@ selected/checked. */
  	transform: translate(3px, 3px) scale(1);
  	/* animate the transition. We can use the cubic-bezier function which is a set of 4 values that determine our timing. Check out https://cubic-bezier.com/#.17,.67,.83,.67 to create your own custom transition  */
  	transition: all 0.3s cubic-bezier(.76, .74, .8, 1.52);
+ }
+
+ .label-radio {
+	position: relative;
+	top: -3px;
+	font-weight: var(--font-weight-semibold);
+
+ }
+
+ .col-3 {
+ 	position: relative;
+ 	float: left;
+	margin-top: 32px;
+ }
+
+
+ .effect-07 {
+ 	position: relative;
+ 	width: 100%;
+ 	display: inline-block;
+ 	padding: 8px 16px;
+ 	font: 20/1.5 var(--font-body);
+ 	letter-spacing: var(--ls-letter-spacing-100);
+ 	color: var(--color-neutral-800);
+ 	background-color: transparent;
+ 	/*border: 0;*/
+ 	/*border-bottom: 1px solid var(--clr-neutral-500);*/
+ 	border: 1px solid var(--color-neutral-500);
+
+ }
+
+ .effect-07~.focus-background {
+ 	position: absolute;
+ 	bottom: 0;
+ 	left: 0;
+ 	width: 0;
+ 	height: 100%;
+ 	z-index: -1;
+ 	background-color: var(--color-augmented-100);
+ 	transition: 0.4s;
+ }
+
+ .effect-07:focus~.focus-background,
+ .has-content.effect-07~.focus-background {
+ 	width: 100%;
+ 	transition: 0.4s;
+ }
+
+ .effect-07~label {
+ 	position: absolute;
+ 	left: 8px;
+ 	width: 100%;
+ 	top: 8px;
+	font-size: 16px;
+ 	color: var(--color-neutral-800);
+ 	transition: 0.3s;
+ 	z-index: -1;
+ 	letter-spacing: var(--ls-letter-spacing-100);
+ }
+
+ .effect-07:focus~label,
+ .has-content.effect-07~label {
+ 	top: -16px;
+ 	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: 1px;
+
+ 	color: var(--color-neutral-800);
+ 	transition: 0.3s;
  }

@@ -3,7 +3,7 @@ $(window).on('load', function () {
 	// makes sure that whole site is loaded
 	console.log('and the Window has loaded,');
    
-	$('.effect-07').val('');
+	$('.col-3 input').val('');
 
 	$('.effect-07').focusout(function () {
 		if ($(this).val() !== '') {
@@ -22,5 +22,20 @@ $(document).ready(function () {
 
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('document is ready in plain JavaScript!');
+
+   const calculate_button = document.getElementById('calculate-button');
+   const reset_button = document.getElementById('reset-button');
+
+   calculate_button.addEventListener('onsubmit', calculateBMI);
+   reset_button.addEventListener('onreset', resetForm);
+
+
+   function calculateBMI(e) {
+      e.preventDefault();
+   }
+
+   function resetForm(e) {
+      e.preventDefault();
+   }
  
 });

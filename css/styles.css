@@ -112,7 +112,6 @@
 	--color-semantic-extreme-obese-100: hsl(0, 96%, 48%);
 
 
-
 	/**************** letter spacing ****************/
 	--ls-letter-spacing-100: 1px;
 	--ls-letter-spacing-200: 2px;
@@ -433,6 +432,10 @@ input[type="radio"]:checked::before {
 	transition: all 0.3s cubic-bezier(.76, .74, .8, 1.52);
 }
 
+.heading {
+	margin-bottom: .333em;
+}
+
 .label-radio {
 	position: relative;
 	top: -3px;
@@ -497,4 +500,86 @@ input[type="radio"]:checked::before {
 	letter-spacing: 1px;
 	color: var(--color-neutral-800);
 	transition: 0.3s;
+}
+
+
+.button-container {
+	position: relative;
+	width: 148%;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+
+	/* display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: space-evenly; */
+}
+.input-container {
+	width: 100%;
+}
+
+.calculate-button.button-3d,
+.reset-button.button-3d {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 50px;
+	display: inline-block;
+	/* margin-right: 3em; */
+	font-family: var(--font-body);
+	font-size: 1.125rem;
+	font-weight: var(--font-weight-semibold);
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	text-align: center;
+	
+
+	border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	-ms-border-radius: 0 0 5px 5px;
+	-o-border-radius: 0 0 5px 5px;
+	border: none;
+	box-shadow: 0 6px #565e66;
+	outline: none;
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-webkit-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-moz-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-ms-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-o-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button.button-3d:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-webkit-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-moz-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-ms-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	-o-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button.button-3d:hover {
+	top: 2px;
+	box-shadow: 0 5px var(--color-augmented-200);
+}
+
+button.button-3d:active {
+	top: 6px;
+	box-shadow: 0 0 #565e66;
+	box-shadow: 0 0 var(--color-augmented-000)
+}
+
+.calculate-button.button-3d {
+	background-color: var(--color-neutral-800);
+	color: var(--color-neutral-000);
+}
+.reset-button.button-3d {
+	background-color: var(--color-augmented-300);
+	color: var(--color-neutral-900);
 }

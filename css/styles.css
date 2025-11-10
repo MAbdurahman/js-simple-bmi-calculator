@@ -101,10 +101,10 @@
 	--color-semantic-overweight-200: hsl(48, 96%, 60%);
 	--color-semantic-overweight-100: hsl(48, 96%, 65%);
 	/* semantic obese colors */
-	--color-semantic-obese-400: hsl(39, 96%, 50%);
-	--color-semantic-obese-300: hsl(39, 96%, 55%);
-	--color-semantic-obese-200: hsl(39, 96%, 60%);
-	--color-semantic-obese-100: hsl(39, 96%, 65%);
+	--color-semantic-obese-400: hsl(32, 96%, 50%);
+	--color-semantic-obese-300: hsl(32, 96%, 55%);
+	--color-semantic-obese-200: hsl(32, 96%, 60%);
+	--color-semantic-obese-100: hsl(32, 96%, 65%);
 	/* semantic extremely obese colors */
 	--color-semantic-extreme-obese-400: hsl(0, 96%, 33%);
 	--color-semantic-extreme-obese-300: hsl(0, 96%, 38%);
@@ -117,10 +117,19 @@ html {
 }
 
 body {
+	position: relative;
+	height: 100dvh;
+	width: 100dvw;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	font-family: var(--font-body);
 	font-optical-sizing: auto;
 	font-weight: 400;
 	font-style: normal;
+	background-color: var(--color-neutral-000);
 }
 /*===============================================================
             Typography Scale - 1.250 - Major Third
@@ -187,6 +196,16 @@ a {
 a:hover {
 	cursor: pointer;
 	opacity: 1;
+}
+
+fieldset {
+	width: 150%;
+}
+
+legend {
+	background-color: transparent;
+	text-align: center;
+	color: var(--color-neutral-800);
 }
 /*===============================================================
                input[type=number] styles
@@ -344,3 +363,55 @@ input[type=number] {
 .utils-add-cursor {
 	cursor: pointer !important;
 }
+
+fieldset legend {
+	font-weight: var(--font-weight-bold);
+}
+
+p > label {
+	margin-left: .25em;
+ }
+
+ input[type="radio"] {
+ 	/* remove the blue button styling by default */
+ 	appearance: none;
+ }
+
+ input[type="radio"] {
+ 	width: 20px;
+ 	height: 20px;
+ 	margin-right: .5em;
+ 	margin-bottom: .7em;
+ 	border-radius: 10px;
+ 	/* remove the default square selection border when you toggle the radio button */
+ 	outline: none;
+ 	border: 2px solid gray;
+ 	/* Adjusts the position of the radio buttons on the text baseline */
+ 	vertical-align: -11px;
+ }
+
+ /* Basically, we build the styling for the radio button "inner circle" using the ::before pseudo element, but set a
+scale(0) transform on it. Remember, scale(0) means we set the original size of the red dot to zero size (in other words, we can't see it). We then use a CSS transition to make it nicely animate into view when the radio is
+selected/checked. */
+ input[type="radio"]::before {
+ 	display: block;
+ 	/* we have to define a content property (I know, weird right!), even if we don't have any text inside. This is just how the ::before pseudo element works */
+ 	content: "";
+ 	width: 10px;
+ 	height: 10px;
+ 	border-radius: 10px;
+ 	background-color: #414141;
+ 	font-size: 1em;
+ 	/* set the original position of red dot */
+ 	transform: translate(-30px, 0px) scale(0);
+ 	/* transition the dot back to starting position. The transition property is shorthand for 4 CSS properties: property, duration, timing-function and delay   */
+ 	transition: all 0.7s ease-in;
+ }
+
+ /* what happens when you check the box. Remember, the checked property will be applied to each radio button clicked on by default - the browser does this for us. This means we can target the :checked state. */
+ input[type="radio"]:checked::before {
+ 	/* set the position of red dot when user clicks */
+ 	transform: translate(3px, 3px) scale(1);
+ 	/* animate the transition. We can use the cubic-bezier function which is a set of 4 values that determine our timing. Check out https://cubic-bezier.com/#.17,.67,.83,.67 to create your own custom transition  */
+ 	transition: all 0.3s cubic-bezier(.76, .74, .8, 1.52);
+ }

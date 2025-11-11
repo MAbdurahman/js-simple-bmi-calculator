@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				metric_measurement.checked === true) &&
 			(height !== '' || height !== 0) &&
 			(weight !== '' || weight !== 0) &&
-			(bmi_results !== 0 || bmi_results !== Nan)
+			(bmi_results !== 0 || !isNaN())
 		) {
 			bmi_message.innerHTML = `<p id="bmi-message">BMI = <b>${bmi_results} </b>(<span class="${message_color}"><b>${text_message}</b></span>)</p>`;
 

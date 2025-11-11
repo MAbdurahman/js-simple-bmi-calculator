@@ -583,3 +583,18 @@ button.button-3d:active {
 	background-color: var(--color-neutral-300);
 	color: var(--color-neutral-900);
 }
+
+
+.swal-button {
+	background-color: var(--color-neutral-800);
+	color: var(--color-neutral-000);
+}
+
+.swal-button:not([disabled]):hover {
+	background: var(--color-neutral-600) radial-gradient(circle, transparent 1%, var(--color-neutral-600) 1%) center/15000%;
+}
+
+.swal-button--cancel {
+	color: #d9d9d9;
+	background-color: #111111;
+}

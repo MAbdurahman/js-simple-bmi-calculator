@@ -2,7 +2,7 @@
 $(window).on('load', function () {
 	// makes sure that whole site is loaded
 	console.log('and the Window has loaded,');
-   
+
 	$('.col-3 input').val('');
 
 	$('.effect-07').focusout(function () {
@@ -15,27 +15,67 @@ $(window).on('load', function () {
 });
 
 $(document).ready(function () {
-   console.log('document is ready in jQuery!')
-
-
+	console.log('document is ready in jQuery!');
 });
 
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('document is ready in plain JavaScript!');
 
-   const calculate_button = document.getElementById('calculate-button');
-   const reset_button = document.getElementById('reset-button');
+	const form = document.getElementById('main-form');
+   const imperial_measurement = document.getElementById('imperial');
+   const metric_measurement = document.getElementById('metric');
 
-   calculate_button.addEventListener('onsubmit', calculateBMI);
-   reset_button.addEventListener('onreset', resetForm);
+	const calculate_button = document.getElementById('calculate-button');
+	const reset_button = document.getElementById('reset-button');
+	const height_field = document.querySelector('#height');
+	const weight_field = document.querySelector('#weight');
+   const bmi_message = document.querySelector('#bmi-message');
+   
+   let bmi_results = 0;
 
+	calculate_button.addEventListener('click', calculateBMI);
+	reset_button.addEventListener('onreset', e => {e.preventDefault()});
+   form.addEventListener('submit', e => {e.preventDefault()});
+	
 
-   function calculateBMI(e) {
-      e.preventDefault();
+   function calculateImperialBMI(height, weight) {
+      const height_result = height * height;
+      const weight_result = weight * 703;
+      
+      return (weight_result / height_result).toFixed(2);
    }
 
-   function resetForm(e) {
-      e.preventDefault();
+   function calculateMetricBMI(height, weight) {
+      const first_result = weight / height / height;
+      return (first_result *10000).toFixed(2);
    }
- 
+
+	function calculateBMI() {
+		const weight = weight_field.value;
+      const height = height_field.value;
+      
+      if (weight === '' || weight === 0) {
+         swal('Invalid Entry', 'Enter Valid Value For Weight!', 'error');
+      }
+      if (height === '' || height === 0) {
+			swal('Invalid Entry', 'Enter Valid Value For Height!', 'error');
+		}
+
+      if (imperial_measurement.checked === false && metric_measurement.checked === false) {
+			swal('Invalid Entry', 'Select Your Unit Of Measurement!', 'error');
+		}
+	
+      if (imperial_measurement.checked) {
+         bmi_results = calculateImperialBMI(height, weight);
+
+      }
+      if (metric_measurement.checked) {
+         bmi_results = calculateMetricBMI(height, weight);
+      }
+     
+
+      console.log('BMI is ', bmi_results);
+      return bmi_results;
+	}
+
 });

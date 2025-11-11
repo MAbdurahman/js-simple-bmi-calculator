@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
          message_color = 'text-red';
       }
 
-      bmi_message.innerHTML = `<p id="bmi-message">BMI = <b>${bmi_results}</b>(<span class="${message_color}"><b>${text_message}</b></span>)</p>`;
+      bmi_message.innerHTML = `<p id="bmi-message">BMI = <b>${bmi_results} </b>(<span class="${message_color}"><b>${text_message}</b></span>)</p>`;
 
 		bmi_message.style.display = 'block';
 

@@ -387,6 +387,9 @@ fieldset legend {
 p>label {
 	margin-left: .25em;
 }
+.form-control {
+	margin-bottom: 1rem;
+}
 
 input[type="radio"] {
 	/* remove the blue button styling by default */
@@ -595,6 +598,30 @@ button.button-3d:active {
 }
 
 .swal-button--cancel {
-	color: #d9d9d9;
-	background-color: #111111;
+	color: var(--color-neutral-000);
+	background-color: var(--color-semantic-extreme-obese-100);
+}
+
+.bmi-message {
+	display: none;
+	font-size: 1.2rem;
+}
+.display-block {
+	display:block !important;
+}
+
+.text-blue {
+	color: var(--color-semantic-underweight-200);
+}
+.text-green {
+	color: var(--color-semantic-normal-200);
+}
+.text-yellow {
+	color: var(--color-semantic-overweight-400);
+}
+.text-orange {
+	color: var(--color-semantic-obese-400);
+}
+.text-red {
+	color: var(--color-semantic-extreme-obese-300);
 }

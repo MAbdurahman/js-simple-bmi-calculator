@@ -34,9 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
    let bmi_results = 0;
 
 	calculate_button.addEventListener('click', calculateBMI);
-	reset_button.addEventListener('onreset', e => {e.preventDefault()});
+	reset_button.addEventListener('onreset', resetForm);
    form.addEventListener('submit', e => {e.preventDefault()});
 	
+   function resetForm(e) {
+      e.preventDefault();
+      
+   }
 
    function calculateImperialBMI(height, weight) {
       const height_result = height * height;
@@ -47,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    function calculateMetricBMI(height, weight) {
       const first_result = weight / height / height;
+
       return (first_result *10000).toFixed(2);
    }
 
@@ -75,7 +80,41 @@ document.addEventListener('DOMContentLoaded', () => {
      
 
       console.log('BMI is ', bmi_results);
-      return bmi_results;
+      let text_message;
+      let message_color;
+      
+      if (bmi_results < 18.5) {
+         text_message = 'Underweight';
+         message_color = 'text-blue';
+      }
+      else if (bmi_results >= 18.5 && bmi_results < 25) {
+         text_message = 'Normal';
+         message_color = 'text-green';
+      }
+      else if (bmi_results >= 25 && bmi_results < 30) {
+         text_message = 'Overweight';
+         message_color = 'text-yellow';
+      }
+      else if (bmi_results >= 30 && bmi_results < 40) {
+         text_message = 'Obese';
+         message_color = 'text-orange';
+      }
+      else {
+         text_message = 'Extreme Obese';
+         message_color = 'text-red';
+      }
+
+      bmi_message.innerHTML = `<p id="bmi-message">BMI = <b>${bmi_results}</b>(<span class="${message_color}"><b>${text_message}</b></span>)</p>`;
+
+		bmi_message.style.display = 'block';
+
+      setTimeout(() => {
+         bmi_message.style.display = 'none';
+      }, 5000)
+     
+
 	}
+  
+   
 
 });

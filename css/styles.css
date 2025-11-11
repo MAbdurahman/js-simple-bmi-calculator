@@ -27,6 +27,7 @@
 }
 
 
+
 /*===============================================================
             root, html, body, and utility classes
 ==================================================================*/
@@ -435,6 +436,36 @@ input[type="radio"]:checked::before {
 	transition: all 0.3s cubic-bezier(.76, .74, .8, 1.52);
 }
 
+/* ================================================
+               preloader
+=================================================== */
+.preloader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: radial-gradient(circle, #fafafa 28%, #fafafa 100%);
+	display: -webkit-box;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	z-index: 10000;
+}
+
+.preloader-gif {
+	width: 10%;
+	align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+	#preloader-gif {
+		width: 60%;
+	}
+}
+
 .heading {
 	margin-bottom: .333em;
 }
@@ -603,8 +634,8 @@ button.button-3d:active {
 }
 
 .bmi-message {
-	display: none;
-	font-size: 1.2rem;
+	visibility: hidden;
+	font-size: 1.75rem;
 }
 .display-block {
 	display:block !important;

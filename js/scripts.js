@@ -16,6 +16,7 @@ $(window).on('load', function () {
 
 $(document).ready(function () {
 	console.log('document is ready in jQuery!');
+   $('#preloader-gif, #preloader').fadeOut(5000, function () {});
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -70,11 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			swal('Invalid Entry', 'Select Your Unit Of Measurement!', 'error');
 		}
 	
-      if (imperial_measurement.checked) {
+      if (imperial_measurement.checked && height !== '' && weight !== '') {
          bmi_results = calculateImperialBMI(height, weight);
 
       }
-      if (metric_measurement.checked) {
+      if (metric_measurement.checked && height !== '' && weight !== '') {
          bmi_results = calculateMetricBMI(height, weight);
       }
      
@@ -104,12 +105,21 @@ document.addEventListener('DOMContentLoaded', () => {
          message_color = 'text-red';
       }
 
-      bmi_message.innerHTML = `<p id="bmi-message">BMI = <b>${bmi_results} </b>(<span class="${message_color}"><b>${text_message}</b></span>)</p>`;
+      if (
+			(imperial_measurement.checked === true ||
+				metric_measurement.checked === true) &&
+			(height !== '' || height !== 0) &&
+			(weight !== '' || weight !== 0) &&
+			(bmi_results !== 0 || bmi_results !== Nan)
+		) {
+			bmi_message.innerHTML = `<p id="bmi-message">BMI = <b>${bmi_results} </b>(<span class="${message_color}"><b>${text_message}</b></span>)</p>`;
 
-		bmi_message.style.display = 'block';
+			bmi_message.style.visibility = 'visible';
+		}
+
 
       setTimeout(() => {
-         bmi_message.style.display = 'none';
+         bmi_message.style.visibility = 'hidden';
       }, 5000)
      
 

@@ -78,9 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (metric_measurement.checked && height !== '' && weight !== '') {
          bmi_results = calculateMetricBMI(height, weight);
       }
-     
 
-      console.log('BMI is ', bmi_results);
       let text_message;
       let message_color;
       
@@ -117,14 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			bmi_message.style.visibility = 'visible';
 		}
 
-
       setTimeout(() => {
          bmi_message.style.visibility = 'hidden';
       }, 5000)
-     
 
 	}
-  
-   
 
 });

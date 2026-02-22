@@ -1,8 +1,6 @@
 /*-----Javascript for js-create-design-website */
-$(window).on('load', function () {
+/*$(window).on('load', function () {
 	// makes sure that whole site is loaded
-	console.log('and the Window has loaded,');
-
 	$('.col-3 input').val('');
 
 	$('.effect-07').focusout(function () {
@@ -12,16 +10,13 @@ $(window).on('load', function () {
 			$(this).removeClass('has-content');
 		}
 	});
-});
+});*/
 
 $(document).ready(function () {
-	console.log('document is ready in jQuery!');
    $('#preloader-gif, #preloader').fadeOut(5000, function () {});
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-	console.log('document is ready in plain JavaScript!');
-
 	const form = document.getElementById('main-form');
    const imperial_measurement = document.getElementById('imperial');
    const metric_measurement = document.getElementById('metric');
@@ -32,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const weight_field = document.querySelector('#weight');
    const bmi_message = document.querySelector('#bmi-message');
    
-   let bmi_results = 0;
+   let bmi_results;
 
 	calculate_button.addEventListener('click', calculateBMI);
 	reset_button.addEventListener('onreset', resetForm);
@@ -40,7 +35,33 @@ document.addEventListener('DOMContentLoaded', () => {
 	
    function resetForm(e) {
       e.preventDefault();
+      removeJSEffect();
       
+   }
+
+   /**************** effect 07 scripts ****************/
+   document.querySelector('.effect-07').value = '';
+
+   document.querySelectorAll('.col-3 > .effect-07').forEach(function(element) {
+      element.addEventListener('focusout', function() {
+         if (this.value !== '') {
+            this.classList.add('has-content');
+
+         } else {
+            this.classList.remove('has-content');
+
+         }
+      });
+   });
+
+
+
+   function removeJSEffect() {
+      document.querySelector('.input-effect').value = '';
+      document.querySelectorAll('input[type= number]').forEach(function(element) {
+         element.classList.remove('has-content');
+
+      });
    }
 
    function calculateImperialBMI(height, weight) {
@@ -59,18 +80,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	function calculateBMI() {
 		const weight = weight_field.value;
       const height = height_field.value;
-      
-      if (weight === '' || weight === 0) {
-         swal('Invalid Entry', 'Enter Valid Value For Weight!', 'error');
-      }
-      if (height === '' || height === 0) {
-			swal('Invalid Entry', 'Enter Valid Value For Height!', 'error');
-		}
+
 
       if (imperial_measurement.checked === false && metric_measurement.checked === false) {
-			swal('Invalid Entry', 'Select Your Unit Of Measurement!', 'error');
+			return swal('Invalid Entry', 'Select Your Unit Of Measurement!', 'error');
 		}
-	
+
+      if (height === '0' ) {
+         return swal('Invalid Entry', 'Enter Value Greater Than Zero For Height!', 'error');
+      }
+      if (height === '') {
+         return swal('Invalid Entry', 'Enter Valid Value For Height!', 'error');
+      }
+
+      if (weight === '0') {
+         return swal('Invalid Entry', 'Enter Value Greater Than Zero For Weight!', 'error');
+      }
+
+      if (weight === '' ) {
+         return swal('Invalid Entry', 'Enter Valid Value For Weight!', 'error');
+      }
+
       if (imperial_measurement.checked && height !== '' && weight !== '') {
          bmi_results = calculateImperialBMI(height, weight);
 

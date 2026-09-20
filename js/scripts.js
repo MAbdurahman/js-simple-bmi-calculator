@@ -1,154 +1,167 @@
-/*-----Javascript for js-create-design-website */
-/*$(window).on('load', function () {
-	// makes sure that whole site is loaded
-	$('.col-3 input').val('');
 
-	$('.effect-07').focusout(function () {
-		if ($(this).val() !== '') {
-			$(this).addClass('has-content');
-		} else {
-			$(this).removeClass('has-content');
-		}
-	});
-});*/
+'use strict';
 
-$(document).ready(function () {
-   $('#preloader-gif, #preloader').fadeOut(5000, function () {});
+document.addEventListener('DOMContentLoaded', function () {
+   // makes sure that whole site is loaded, so the 3000ms preloader coincides with
+   // the delay of 3000ms for the header content animation
+   const preloader = document.getElementById('preloader');
+   const preloaderGif = document.getElementById('preloader-gif');
+
+   if (preloaderGif) {
+      preloaderGif.style.transition = 'opacity 3000ms ease-in-out';
+      preloaderGif.style.opacity = '0';
+
+   }
+   if (preloader) {
+      preloader.style.transition = 'opacity 3000ms ease-in-out';
+      preloader.style.opacity = '0';
+   }
+
+   setTimeout(function () {
+      preloaderGif.style.display = 'none';
+      preloader.style.display = 'none';
+   }, 5000);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-	const form = document.getElementById('main-form');
-   const imperial_measurement = document.getElementById('imperial');
-   const metric_measurement = document.getElementById('metric');
+   const form = document.getElementById('main-form');
+   const imperialMeasurement = document.getElementById('imperial');
+   const metricMeasurement = document.getElementById('metric');
+   const heightField = document.querySelector('#height')
+   const weightField = document.querySelector('#weight');
+   const bmiMessage = document.querySelector('#bmi-message');
 
-	const calculate_button = document.getElementById('calculate-button');
-	const reset_button = document.getElementById('reset-button');
-	const height_field = document.querySelector('#height');
-	const weight_field = document.querySelector('#weight');
-   const bmi_message = document.querySelector('#bmi-message');
-   
-   let bmi_results;
+   let heightValue = document.getElementById('height').value;
+   let weightValue = document.getElementById('weight').value;
+   heightValue = heightValue.trim();
+   weightValue = weightValue.trim();
 
-	calculate_button.addEventListener('click', calculateBMI);
-	reset_button.addEventListener('onreset', resetForm);
-   form.addEventListener('submit', e => {e.preventDefault()});
-	
-   function resetForm(e) {
-      e.preventDefault();
-      removeJSEffect();
-      
+   let bmiResults = 0;
+
+   /************************* label effect-07 *************************/
+   const inputs = document.querySelectorAll('.effect-07');
+
+   function updateInputState(input) {
+      input.classList.toggle('has-content', input.value.trim() !== '');
    }
 
-   /**************** effect 07 scripts ****************/
-   document.querySelector('.effect-07').value = '';
+   inputs.forEach((input) => {
+      updateInputState(input); // Handles values already present on load.
 
-   document.querySelectorAll('.col-3 > .effect-07').forEach(function(element) {
-      element.addEventListener('focusout', function() {
-         if (this.value !== '') {
-            this.classList.add('has-content');
+      input.addEventListener('input', () => {
+         updateInputState(input);
+      });
 
-         } else {
-            this.classList.remove('has-content');
-
-         }
+      input.addEventListener('blur', () => {
+         updateInputState(input);
       });
    });
 
-
-
-   function removeJSEffect() {
-      document.querySelector('.input-effect').value = '';
-      document.querySelectorAll('input[type= number]').forEach(function(element) {
-         element.classList.remove('has-content');
-
-      });
-   }
-
    function calculateImperialBMI(height, weight) {
-      const height_result = height * height;
-      const weight_result = weight * 703;
-      
-      return (weight_result / height_result).toFixed(2);
+      const heightResult = height * height;
+      const weightResult = weight * 703;
+
+      return (weightResult / heightResult).toFixed(2);
    }
 
    function calculateMetricBMI(height, weight) {
-      const first_result = weight / height / height;
+      const firstResult = weight / height / height;
 
-      return (first_result *10000).toFixed(2);
+      return (firstResult * 10000).toFixed(2);
    }
 
-	function calculateBMI() {
-		const weight = weight_field.value;
-      const height = height_field.value;
+   function calculateBMI() {
+      const weight = weightField.value.trim();
+      const height = heightField.value.trim();
 
+      if (heightValue === 0) {
+         swal('Invalid Entry', 'Enter Valid Value For Weight!', 'error');
+      }
+      if (weightValue === 0) {
+         swal('Invalid Entry', 'Enter Valid Value For Weight!', 'error');
+      }
 
-      if (imperial_measurement.checked === false && metric_measurement.checked === false) {
-			return swal('Invalid Entry', 'Select Your Unit Of Measurement!', 'error');
-		}
-
-      if (height === '0' ) {
-         return swal('Invalid Entry', 'Enter Value Greater Than Zero For Height!', 'error');
+      if (weight === '') {
+         swal('Invalid Entry', 'Enter Valid Value For Weight!', 'error');
+      }
+      if (weight === 0) {
+         swal('Invalid Entry', 'Enter Valid Value For Weight!', 'error');
       }
       if (height === '') {
-         return swal('Invalid Entry', 'Enter Valid Value For Height!', 'error');
+         swal('Invalid Entry', 'Enter Valid Value For Height!', 'error');
+      }
+      if (height === 0) {
+         swal('Invalid Entry', 'Enter Valid Value For Height!', 'error');
       }
 
-      if (weight === '0') {
-         return swal('Invalid Entry', 'Enter Value Greater Than Zero For Weight!', 'error');
+      if (imperialMeasurement.checked === false) {
+         if (metricMeasurement.checked === false) {
+            swal('Invalid Entry', 'Select Your Unit Of Measurement!', 'error');
+         }
       }
 
-      if (weight === '' ) {
-         return swal('Invalid Entry', 'Enter Valid Value For Weight!', 'error');
-      }
-
-      if (imperial_measurement.checked && height !== '' && weight !== '') {
-         bmi_results = calculateImperialBMI(height, weight);
+      if (imperialMeasurement.checked && height !== '' && weight !== '') {
+         bmiResults = calculateImperialBMI(height, weight);
 
       }
-      if (metric_measurement.checked && height !== '' && weight !== '') {
-         bmi_results = calculateMetricBMI(height, weight);
+      if (metricMeasurement.checked && height !== '' && weight !== '') {
+         bmiResults = calculateMetricBMI(height, weight);
       }
 
-      let text_message;
-      let message_color;
-      
-      if (bmi_results < 18.5) {
-         text_message = 'Underweight';
-         message_color = 'text-blue';
-      }
-      else if (bmi_results >= 18.5 && bmi_results < 25) {
-         text_message = 'Normal';
-         message_color = 'text-green';
-      }
-      else if (bmi_results >= 25 && bmi_results < 30) {
-         text_message = 'Overweight';
-         message_color = 'text-yellow';
-      }
-      else if (bmi_results >= 30 && bmi_results < 40) {
-         text_message = 'Obese';
-         message_color = 'text-orange';
-      }
-      else {
-         text_message = 'Extreme Obese';
-         message_color = 'text-red';
+      let textMessage;
+      let messageColor;
+
+      if (bmiResults < 18.5) {
+         textMessage = 'Underweight';
+         messageColor = 'text-blue';
+      } else if (bmiResults >= 18.5 && bmiResults < 25) {
+         textMessage = 'Normal';
+         messageColor = 'text-green';
+      } else if (bmiResults >= 25 && bmiResults < 30) {
+         textMessage = 'Overweight';
+         messageColor = 'text-yellow';
+      } else if (bmiResults >= 30 && bmiResults < 40) {
+         textMessage = 'Obese';
+         messageColor = 'text-orange';
+      } else {
+         textMessage = 'Extreme Obese';
+         messageColor = 'text-red';
       }
 
       if (
-			(imperial_measurement.checked === true ||
-				metric_measurement.checked === true) &&
-			(height !== '' || height !== 0) &&
-			(weight !== '' || weight !== 0) &&
-			(bmi_results !== 0 || !isNaN())
-		) {
-			bmi_message.innerHTML = `<p id="bmi-message">BMI = <b>${bmi_results} </b>(<span class="${message_color}"><b>${text_message}</b></span>)</p>`;
+         (imperialMeasurement.checked || metricMeasurement.checked) &&
+         Number(height) > 0 &&
+         Number(weight) > 0 &&
+         Number.isFinite(Number(bmiResults)) &&
+         Number(bmiResults) > 0
+      ) {
+         bmiMessage.innerHTML = `BMI = <b>${bmiResults}</b> 
+        (<span class='${messageColor}'><b>${textMessage}</b></span>)`;
 
-			bmi_message.style.visibility = 'visible';
-		}
+         bmiMessage.style.visibility = 'visible';
+      }
 
       setTimeout(() => {
-         bmi_message.style.visibility = 'hidden';
-      }, 5000)
+         bmiMessage.style.visibility = 'hidden';
+      }, 5000);
+   }
 
-	}
+   form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      calculateBMI();
+   });
+   form.addEventListener('reset', () => {
+      // Runs after the browser restores each field to its default value
+      setTimeout(() => {
+         document.querySelectorAll('.effect-07').forEach((input) => {
+            input.classList.remove('has-content');
+         });
 
+         bmiMessage.textContent = '';
+         bmiMessage.style.visibility = 'hidden';
+
+         // Optional: clear BMI state too
+         bmiResults = 0;
+      }, 0);
+   });
 });
